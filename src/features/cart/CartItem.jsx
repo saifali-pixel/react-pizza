@@ -1,10 +1,18 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import Button from "../../ui/Button";
-import formatCurrency from "../../utils/helpers";
-
+import { useSelector } from "react-redux";
+import DeleteItem from "./DeleteItem";
+import UpdateItemQuantity from "./UpdateItemQuantity";
+import { getCurrentQuantityById } from "./CartSlice";
+function formatCurrency(value) {
+  return new Intl.NumberFormat("en", {
+    style: "currency",
+    currency: "EUR",
+  }).format(value);
+}
 function CartItem({ item }) {
   const { pizzaId, name, quantity, totalPrice } = item;
+  const currentquantity = useSelector(getCurrentQuantityById(pizzaId));
 
   return (
     <li className="py-3 sm:flex sm:items-center sm:justify-between">
@@ -13,7 +21,13 @@ function CartItem({ item }) {
       </p>
       <div className="flex items-center justify-between sm:gap-6">
         <p className="text-sm font-bold">{formatCurrency(totalPrice)}</p>
-        <Button type="small">Delete</Button>
+
+        <UpdateItemQuantity
+          pizzaId={pizzaId}
+          currentquantity={currentquantity}
+        />
+
+        <DeleteItem pizzaId={pizzaId} />
       </div>
     </li>
   );

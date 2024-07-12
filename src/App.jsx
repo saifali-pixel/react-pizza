@@ -9,6 +9,9 @@ import AppLayout from "./ui/AppLayout";
 import { Loader as menuLoader } from "./features/menu/Menu";
 import { Loader as orderLoader } from "./features/order/Order";
 import { action as createOrderAction } from "./features/order/CreateOrder";
+import { Provider } from "react-redux";
+import store from "./store";
+import { action as updateOrder } from "./features/order/UpdateOrder";
 
 const router = createBrowserRouter([
   {
@@ -34,6 +37,7 @@ const router = createBrowserRouter([
         element: <Order />,
         loader: orderLoader,
         errorElement: <Error />,
+        action: updateOrder,
       },
       {
         path: "/order/new",
@@ -46,9 +50,9 @@ const router = createBrowserRouter([
 
 function App() {
   return (
-    <>
+    <Provider store={store}>
       <RouterProvider router={router} />
-    </>
+    </Provider>
   );
 }
 

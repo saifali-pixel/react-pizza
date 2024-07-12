@@ -1,6 +1,10 @@
 /* eslint-disable no-unused-vars */
 
+import { useDispatch, useSelector } from "react-redux";
 import Button from "../../ui/Button";
+import { addItem, getCurrentQuantityById } from "../cart/CartSlice";
+import DeleteItem from "../cart/DeleteItem";
+import UpdateItemQuantity from "../cart/UpdateItemQuantity";
 
 /* eslint-disable react/prop-types */
 function formatCurrency(value) {
@@ -12,9 +16,24 @@ function formatCurrency(value) {
 
 function MenuItem({ pizza }) {
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;
+  const dispatch = useDispatch();
+  const currentquantity = useSelector(getCurrentQuantityById(id));
+
+  const isincart = currentquantity > 0;
+
+  function handleAddtoCart() {
+    const newItem = {
+      pizzaId: id,
+      name,
+      unitPrice,
+      quantity: 1,
+      totalPrice: unitPrice * 1,
+    };
+    dispatch(addItem(newItem));
+  }
 
   return (
-    <li className="flex gap-4 py-2">
+    <li className="flex gap-4 py-2 ">
       <img
         src={imageUrl}
         alt={name}
@@ -34,7 +53,26 @@ function MenuItem({ pizza }) {
             </p>
           )}
 
-          <Button type="small">Add to cart</Button>
+          {isincart && (
+            <div className="flex items-center gap-3 sm:gap-8">
+              <UpdateItemQuantity
+                pizzaId={id}
+                currentquantity={currentquantity}
+              />
+              <DeleteItem pizzaId={id} />
+            </div>
+          )}
+
+          {/* {cart.find(
+            (item) =>
+              item.pizzaId === id && <DeleteItem pizzaId={id} key={id} />
+          )} */}
+
+          {!soldOut && !isincart && (
+            <Button key={id} onClick={handleAddtoCart} type="small">
+              Add to cart
+            </Button>
+          )}
         </div>
       </div>
     </li>

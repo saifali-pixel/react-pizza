@@ -7,12 +7,12 @@ function AppLayout() {
   const { state } = useNavigation();
 
   return (
-    <div className="grid h-screen grid-rows-[auto_1fr_auto]">
+    <div className="grid h-screen grid-rows-[auto_1fr_auto] font-sans">
       {state === "loading" && <Loader />}
       <Header />
 
-      <div className="overflow-scroll">
-        <main className="mx-auto max-w-3xl">
+      <div className="overflow-scroll ">
+        <main className="mx-auto max-w-3xl ">
           <Outlet />
         </main>
       </div>
