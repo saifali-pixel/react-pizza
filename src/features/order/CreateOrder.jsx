@@ -10,19 +10,13 @@ import EmptyCart from "../cart/EmptyCart";
 import store from "../../store";
 import { clearCart } from "../cart/CartSlice";
 import { fetchAddress } from "../user/userSlice";
+import { formatCurrency } from "../../utils/helpers";
 
 // https://uibakery.io/regex-library/phone-number
 const isValidPhone = (str) =>
   /^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/.test(
     str
   );
-
-function formatCurrency(value) {
-  return new Intl.NumberFormat("en", {
-    style: "currency",
-    currency: "EUR",
-  }).format(value);
-}
 
 function CreateOrder() {
   const [withPriority, setWithPriority] = useState(false);

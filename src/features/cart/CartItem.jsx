@@ -4,12 +4,8 @@ import { useSelector } from "react-redux";
 import DeleteItem from "./DeleteItem";
 import UpdateItemQuantity from "./UpdateItemQuantity";
 import { getCurrentQuantityById } from "./CartSlice";
-function formatCurrency(value) {
-  return new Intl.NumberFormat("en", {
-    style: "currency",
-    currency: "EUR",
-  }).format(value);
-}
+import { formatCurrency } from "../../utils/helpers";
+
 function CartItem({ item }) {
   const { pizzaId, name, quantity, totalPrice } = item;
   const currentquantity = useSelector(getCurrentQuantityById(pizzaId));

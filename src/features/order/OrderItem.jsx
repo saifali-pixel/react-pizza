@@ -1,11 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
-function formatCurrency(value) {
-  return new Intl.NumberFormat("en", {
-    style: "currency",
-    currency: "EUR",
-  }).format(value);
-}
+import { formatCurrency } from "../../utils/helpers";
+
 function OrderItem({ item, isLoadingIngredients, ingredients }) {
   const { quantity, name, totalPrice } = item;
 

@@ -5,14 +5,8 @@ import Button from "../../ui/Button";
 import { addItem, getCurrentQuantityById } from "../cart/CartSlice";
 import DeleteItem from "../cart/DeleteItem";
 import UpdateItemQuantity from "../cart/UpdateItemQuantity";
-
+import { formatCurrency } from "../../utils/helpers";
 /* eslint-disable react/prop-types */
-function formatCurrency(value) {
-  return new Intl.NumberFormat("en", {
-    style: "currency",
-    currency: "EUR",
-  }).format(value);
-}
 
 function MenuItem({ pizza }) {
   const { id, name, unitPrice, ingredients, soldOut, imageUrl } = pizza;

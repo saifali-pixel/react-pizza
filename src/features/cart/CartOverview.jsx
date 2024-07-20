@@ -2,12 +2,7 @@ import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 // import { getCartPrice, getCartQuantity } from "./CartSlice";
 
-function formatCurrency(value) {
-  return new Intl.NumberFormat("en", {
-    style: "currency",
-    currency: "EUR",
-  }).format(value);
-}
+import { formatCurrency } from "../../utils/helpers";
 
 function CartOverview() {
   const { cart } = useSelector((state) => state.cart);
